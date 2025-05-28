@@ -1,36 +1,51 @@
-## Micronaut 4.1.4 Documentation
+# rxjava3
 
-- [User Guide](https://docs.micronaut.io/4.1.4/guide/index.html)
-- [API Reference](https://docs.micronaut.io/4.1.4/api/index.html)
-- [Configuration Reference](https://docs.micronaut.io/4.1.4/guide/configurationreference.html)
-- [Micronaut Guides](https://guides.micronaut.io/index.html)
----
+## Setting up an IDE
+https://javalin.io/tutorials/maven-setup
 
-- [Micronaut Maven Plugin documentation](https://micronaut-projects.github.io/micronaut-maven-plugin/latest/)
-## Feature lombok documentation
+##Setup local environment
+Enter following configuration to ~/.m2/settings.xml
+```
+<settings>
+  <profiles>
+    <profile>
+      <id>codenow</id>
+      <repositories>
+        <repository>
+          <id>codenow-releases</id>
+          <url></url>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+  <servers>
+    <server>
+      <id>codenow-releases</id>
+      <username>ENTER YOUR USERNAME HERE</username>
+      <password><![CDATA[ENTER YOUR PASSWORD HERE]]></password>
+    </server>
+  </servers>
+  <activeProfiles>
+    <activeProfile>codenow</activeProfile>
+  </activeProfiles>
+</settings>
+```
 
-- [Micronaut Project Lombok documentation](https://docs.micronaut.io/latest/guide/index.html#lombok)
+## Application runner
+To run application locally, the SERVER_PORT environment variable should be defined 
+```
+export SERVER_PORT=7000
+```
+To override, use JVM options such as
+``` 
+-Dlogback.configurationFile=logback-codenow.xml -Dconfig.file=codenow/config/startup-message.txt -Xmx80m -Xms80m -XX:MaxMetaspaceSize=80m
+```
 
-- [https://projectlombok.org/features/all](https://projectlombok.org/features/all)
+## Deployment configuration
+All files located in `./codenow/config` directory will be deployed alongside the application and available in `/codenow/config` directory
 
-
-## Feature serialization-jackson documentation
-
-- [Micronaut Serialization Jackson Core documentation](https://micronaut-projects.github.io/micronaut-serialization/latest/guide/)
-
-
-## Feature maven-enforcer-plugin documentation
-
-- [https://maven.apache.org/enforcer/maven-enforcer-plugin/](https://maven.apache.org/enforcer/maven-enforcer-plugin/)
-
-
-## Feature micronaut-aot documentation
-
-- [Micronaut AOT documentation](https://micronaut-projects.github.io/micronaut-aot/latest/guide/)
-
-
-## Feature rxjava3 documentation
-
-- [Micronaut RxJava 3 documentation](https://micronaut-projects.github.io/micronaut-rxjava3/snapshot/guide/index.html)
-
-
+## Curl examples
+```
+curl -X GET \
+ http://localhost:7000/
+```
